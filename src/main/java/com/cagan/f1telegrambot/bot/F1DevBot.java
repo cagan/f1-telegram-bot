@@ -2,14 +2,8 @@ package com.cagan.f1telegrambot.bot;
 
 import com.cagan.f1telegrambot.dto.RacingStatsResponse;
 import com.cagan.f1telegrambot.service.F1StatusService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -48,7 +42,7 @@ public class F1DevBot extends TelegramLongPollingBot {
             String input = message.getText();
 
             StringBuilder stringBuilder = new StringBuilder();
-            if ("/drivers".equals(input)) {
+            if ("/livescore".equals(input)) {
                 log.info("Fetching Drivers Input [Drivers: {}]...", input);
                 List<RacingStatsResponse> list = statusService.getCurrentStats();
                 String html = statusService.getStatusHtml();
