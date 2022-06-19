@@ -14,7 +14,7 @@
     <name>f1-telegram-bot</name>
     <description>f1-telegram-bot</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>11</java.version>
         <telegrambots.version>6.0.1</telegrambots.version>
     </properties>
     <dependencies>
