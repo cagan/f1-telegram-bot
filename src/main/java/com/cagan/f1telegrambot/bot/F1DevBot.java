@@ -3,6 +3,8 @@ package com.cagan.f1telegrambot.bot;
 import com.cagan.f1telegrambot.dto.RacingStatsResponse;
 import com.cagan.f1telegrambot.service.F1StatusService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.List;
 
 public class F1DevBot extends TelegramLongPollingBot {
+    private static final Logger log = LoggerFactory.getLogger(F1DevBot.class);
     private final String botUsername;
     private final String botToken;
     private final F1StatusService statusService;
@@ -46,6 +49,7 @@ public class F1DevBot extends TelegramLongPollingBot {
 
             StringBuilder stringBuilder = new StringBuilder();
             if ("/drivers".equals(input)) {
+                log.info("Fetching Drivers Input [Drivers: {}]...", input);
                 List<RacingStatsResponse> list = statusService.getCurrentStats();
                 String html = statusService.getStatusHtml();
 
@@ -63,6 +67,7 @@ public class F1DevBot extends TelegramLongPollingBot {
 
             try {
                 execute(message); // Call method to send the message
+                log.info("[MESSAGE: {}] fetched successfully", message);
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
